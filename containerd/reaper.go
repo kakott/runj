@@ -26,7 +26,7 @@ const (
 
 func procReapAcquire() error {
 	pid := unix.Getpid()
-	_, _, err := unix.Syscall(unix.SYS_PROCCTL, _P_PID, uintptr(pid), _PROC_REAP_ACQUIRE)
+	_, _, err := unix.Syscall6(unix.SYS_PROCCTL, _P_PID, uintptr(pid), _PROC_REAP_ACQUIRE, 0, 0, 0)
 	if err != 0 {
 		return err
 	}
