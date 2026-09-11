@@ -27,7 +27,10 @@ const (
 func procReapAcquire() error {
 	pid := unix.Getpid()
 	_, _, err := unix.Syscall(unix.SYS_PROCCTL, _P_PID, uintptr(pid), _PROC_REAP_ACQUIRE)
-	return err
+	if err != 0 {
+		return err
+	}
+	return nil
 }
 
 // End section for upstream contribution
